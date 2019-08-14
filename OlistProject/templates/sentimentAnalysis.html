@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Olist Project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <form action = "/sentimentAnalysis" method = "post">
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" class="form-control" id="productName" name='productName'>
+                <br />
+                <button type='submit' class='btn btn-primary'>Submit</button>
+            </div>
+        </form>
+        <div>
+            {% if response %}
+                Product Name: {{response.productName}}    
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Sentiment Type</td>
+                            <th>Value</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key in response.review_score %}
+                            <tr>
+                                <td>{{key}}</td>
+                                <td>{{response.review_score[key]}}</td>
+                            </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
